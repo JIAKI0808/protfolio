@@ -1,0 +1,36 @@
+// src/assets/styles/global-font.scss（匹配main.js中的路径）
+// 1. 导入自定义标题字体（修复format+路径+兼容性）
+@font-face {
+  font-family: "TitleCustomFont"; // 自定义标题字体名称
+  // 路径说明：
+  // 若 fonts 文件夹和 global-font.scss 同目录（assets/styles/fonts/），用 ./fonts/
+  // 若 fonts 文件夹在 assets/fonts/，用 ../fonts/
+  src: url("../fonts/HanYiTaiJiTiJian-1.ttf") format("truetype"); // 核心：ttf对应truetype
+  // 可选：添加woff2/woff兜底（推荐），提升兼容性
+  // src: url("../fonts/corp-round-v1-2.woff2") format("woff2"),
+  //      url("../fonts/corp-round-v1-2.woff") format("woff"),
+  //      url("../fonts/corp-round-v1-2.ttf") format("truetype");
+  font-weight: 700; // 标题加粗（需确保字体文件本身是加粗版本）
+  font-style: normal;
+  font-display: swap; // 优化加载体验
+}
+
+// 2. 全局仅替换标题字体（修复缩进+强化优先级）
+.card-title,
+.intro-title,
+.about-title,
+.title-font,
+.module-title { // 修复多余缩进
+  font-family: "TitleCustomFont" !important; // 先强制用自定义字体，兜底写在后面
+  font-family: "TitleCustomFont", "Microsoft YaHei Bold", "PingFang SC Bold", sans-serif !important;
+  font-weight: 700 !important; // 确保和@font-face的weight一致
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 3. 描述文字强制保持默认字体
+.card-desc,
+.intro-desc,
+.desc-font {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif !important;
+}
